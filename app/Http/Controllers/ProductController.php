@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 session_start();
-
+use App\Models\Cart;
 class ProductController extends Controller
 {
 	 public function AuthLogin(){
@@ -40,6 +40,8 @@ $this->AuthLogin();
 
     public function save(Request $request){
     	$this->AuthLogin();
+
+
     	$data = array();
     	$data['product_name'] = $request->product_name;
 		$data['product_price'] = $request->product_price;
@@ -146,5 +148,19 @@ $this->AuthLogin();
     	->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_id',[$product_id])->get();
 
     	return view('pages.sanpham.show_detail')->with('category',$cate_product)->with('brand',$brand_product)->with('details_product', $details_product)->with('related_product',$related_product);
+    }
+
+    public function addtocart(Request $request){
+        $cart = new Cart();
+        $cart->product_id = $request->product_id;
+        $cart->product_name = $request->product_name;
+        $cart->price = $request->price;
+        $cart->quality = $request->quality;
+        if(empty($cart->user_email)){
+            $cart->user_email = '';
+        }
+       
+        $cart->save();
+       
     }
 }

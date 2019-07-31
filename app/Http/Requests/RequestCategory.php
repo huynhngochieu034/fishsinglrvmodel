@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class RequestCategory extends FormRequest
 {
@@ -13,7 +14,7 @@ class RequestCategory extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,15 +25,16 @@ class RequestCategory extends FormRequest
     public function rules()
     {
         return [
-            'category_product_name'=> 'requied'
+            //'category_product_name'=> 'requied'
+           // 'category_product_name'=> 'unique'
         ];
     }
 
     public function messages()
     {
         return [
-            'category_product_name.requied'=> 'Trường này không được để trống',
-            
+           // 'category_product_name.requied'=> 'Trường này không được để trống'
+             //'category_product_name.unique'=> 'Tên danh mục đã tồn tại'
         ];
     }
 }

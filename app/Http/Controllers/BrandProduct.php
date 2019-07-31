@@ -7,6 +7,7 @@ use DB;
 use App\Http\Requests;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Brand;
 session_start();
 class BrandProduct extends Controller
 {
@@ -34,12 +35,13 @@ $this->AuthLogin();
 
     public function save(Request $request){
         $this->AuthLogin();
-    	$data = array();
-    	$data['brand_name'] = $request->brand_product_name;
-    	$data['brand_desc'] = $request->brand_product_desc;
-    	$data['brand_status'] = $request->brand_product_status;
 
-    	DB::table('tbl_brand')->insert($data);
+        $brand = new Brand();
+        $brand->brand_name = $request->brand_product_name;
+        $brand->brand_desc = $request->brand_product_desc;
+        $brand->brand_status = $request->brand_product_status;
+        $brand->save();
+        
     	Session::put('message', 'Thêm thương hiệu sản phẩm thành công');
     	return Redirect::to('/add-brand-product');
     }

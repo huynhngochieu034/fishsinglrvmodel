@@ -62,7 +62,6 @@ Route::get('/active-product/{product_id}', 'ProductController@active');
 Route::post('/save-product', 'ProductController@save');
 Route::post('/update-product/{product_id}', 'ProductController@update');
 
-///CART
-Route::prefix('shopping')->group(function(){
-	Route::get('/add/{id}','ShoppingCartController@addProduct')->name('add.shopping.cart');
-});
+//add to cart
+//Route::match(['get','post'], '/add-cart','ProductController@addtocart');
+Route::post('/add-cart', 'ProductController@addtocart');

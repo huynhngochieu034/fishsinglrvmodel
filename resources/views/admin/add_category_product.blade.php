@@ -20,12 +20,8 @@
                                     {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên danh mục</label>
-                                    <input type="text" name="category_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
-                                     @if($errors->has('category_product_name'))
-                                    <span style="color: red" class="error-text">
-                                          {{$errors->first('category_product_name')}}
-                                          </span>
-                                     @endif
+                                    <input type="text" name="category_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" required>
+                                   
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mô tả danh mục</label>

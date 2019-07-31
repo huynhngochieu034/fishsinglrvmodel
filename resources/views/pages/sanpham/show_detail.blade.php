@@ -41,16 +41,20 @@
 
 						</div>
 						<div class="col-sm-7">
+							<form name="addtocartForm" id="addtocartForm" action="{{ URL::to('add-cart')}}" method="post">{{ csrf_field() }}
+								<input type="hidden" name="product_id" value="{{$value->product_id}}">
+								<input type="hidden" name="product_name" value="{{$value->product_name}}">
+								<input type="hidden" name="price" value="{{$value->product_price}}">
+
+
 							<div class="product-information"><!--/product-information-->
-								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
 								<h2>{{$value->product_name}}</h2>
 								<p>Mã ID: {{$value->product_id}}</p>
-								<img src="images/product-details/rating.png" alt="" />
 								<span>
 									<span>{{number_format($value->product_price).'  VNĐ'}}</span>
 									<label>Số lượng:</label>
-									<input type="number" min="1" value="1" />
-									<button type="button" class="btn btn-fefault cart">
+									<input type="number" name="quality" placeholder="1" min="1"/>
+									<button type="submit" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Thêm giỏ hàng
 									</button>
@@ -59,9 +63,11 @@
 								<p><b>Điều kiện:</b> Mới 100%</p>
 								<p><b>Thương hiệu: </b>{{$value->brand_name}}</p>
 								<p><b>Danh mục: </b>{{$value->category_name}}</p>
-								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+								
 							</div><!--/product-information-->
+							</form>
 						</div>
+						
 </div><!--/product-details-->
 
 					<div class="category-tab shop-details-tab"><!--category-tab-->

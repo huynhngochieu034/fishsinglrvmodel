@@ -33,20 +33,23 @@ class CategoryProduct extends Controller
     	return view('admin_layout')->with('admin.all_category_product', $manager_category_product);
     }
 
-    public function save(RequestCategory $requestCategory,Request $request){
+    public function save(Request $request){
         $this->AuthLogin();
-
-        //dd($requestCategory->all());
-
         $category = new Category();
-    	// $data = array();
-    	// $data['category_name'] = $request->category_product_name;
-    	// $data['category_desc'] = $request->category_product_desc;
-    	// $data['category_status'] = $request->category_product_status;
+    	
 
         $category->category_name = $request->category_product_name;
         $category->category_desc = $request->category_product_desc;
         $category->category_status = $request->category_product_status;
+
+        // $validate = Category::get()->count()->where('category_name',$request->cate_product_name);
+        // //$validate = DB::table('tbl_category_product')->where('category_name',$request->cate_product_name)->count();
+        // if($validate == 0){
+          
+        // }else{
+        //     Session::put('message', 'Tên danh mục sản phẩm đã tồn tại.');
+        // return Redirect::to('/add-category-product');
+        // }
 
     	$category->save();
     	Session::put('message', 'Thêm danh mục sản phẩm thành công');
@@ -76,11 +79,16 @@ $this->AuthLogin();
 
  public function update($category_product_id,Request $request){
     $this->AuthLogin();
+    //$category = Category::find($category_product_id);
         $data = array();
         $data['category_name'] = $request->category_product_name;
         $data['category_desc'] = $request->category_product_desc;
 
         DB::table('tbl_category_product')->where('category_id',$category_product_id)->update($data);
+     // $category->category_name = $request->category_product_name;
+     //    $category->category_desc = $request->category_product_desc;
+     //    $category->category_status = $request->category_product_status;
+     //    $category->save();
         Session::put('message', 'Cập nhật danh mục sản phẩm thành công');
         return Redirect::to('/all-category-product');
     }
