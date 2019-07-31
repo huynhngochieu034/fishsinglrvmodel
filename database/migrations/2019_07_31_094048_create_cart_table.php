@@ -20,7 +20,8 @@ class CreateCartTable extends Migration
             $table->integer('quality');
             $table->string('price');
             $table->string('user_email');
-
+            $table->string('session_id');
+            $table->string('image');
             $table->timestamps();
         });
     }

@@ -42,21 +42,21 @@ $this->AuthLogin();
         $brand->brand_status = $request->brand_product_status;
         $brand->save();
         
-    	Session::put('message', 'Thêm thương hiệu sản phẩm thành công');
+    	Session::put('messagesuccess', 'Thêm thương hiệu sản phẩm thành công');
     	return Redirect::to('/add-brand-product');
     }
 
  	public function unactive($brand_product_id){
         $this->AuthLogin();
     	DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update(['brand_status'=>0]);
-    	Session::put('message', 'Kích hoạt thương hiệu thành công');
+    	Session::put('messagesuccess', 'Kích hoạt thương hiệu thành công');
     	return Redirect::to('/all-brand-product');
     }
 
     public function active($brand_product_id){
         $this->AuthLogin();
     	DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update(['brand_status'=>1]);
-    	Session::put('message', 'Ẩn thương hiệu thành công');
+    	Session::put('messagesuccess', 'Ẩn thương hiệu thành công');
     	return Redirect::to('/all-brand-product');
     }
 
@@ -75,14 +75,14 @@ $this->AuthLogin();
         $data['brand_desc'] = $request->brand_product_desc;
 
         DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update($data);
-        Session::put('message', 'Cập nhật thương hiệu thành công');
+        Session::put('messagesuccess', 'Cập nhật thương hiệu thành công');
         return Redirect::to('/all-brand-product');
     }
 
     public function delete($brand_product_id){
         $this->AuthLogin();
         DB::table('tbl_brand')->where('brand_id',$brand_product_id)->delete();
-        Session::put('message', 'Xóa thương hiệu thành công');
+        Session::put('messagesuccess', 'Xóa thương hiệu thành công');
         return Redirect::to('/all-brand-product');
     }
 

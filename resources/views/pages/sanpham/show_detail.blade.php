@@ -2,16 +2,21 @@
  @extends('welcome')
  @section('content')
 @foreach($details_product as $key => $value)
+				@if(Session::has('flash_message_error'))
+				<div class="alert alert-danger alert-block">
+					<button type="button" class="close" data-dismiss="alert">x</button>
+						<strong>{!! session('flash_message_error') !!}</strong>
+				</div>
+				@endif
 <div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="{{URL::to('/public/uploads/product/'.$value->product_image)}}" alt="" />
-								<h3>ZOOM</h3>
+								<img height="100" width="100" src="{{URL::to('/public/uploads/product/'.$value->product_image)}}" alt="" />
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
 								
 								  <!-- Wrapper for slides -->
-								    <div class="carousel-inner">
+								   <!--  <div class="carousel-inner">
 										<div class="item active">
 										  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
 										  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
@@ -26,17 +31,17 @@
 										  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
 										  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
 										  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-										</div>
+										</div> -->
 										
-									</div>
+									<!-- </div> -->
 
 								  <!-- Controls -->
-								  <a class="left item-control" href="#similar-product" data-slide="prev">
+								  <!-- <a class="left item-control" href="#similar-product" data-slide="prev">
 									<i class="fa fa-angle-left"></i>
 								  </a>
 								  <a class="right item-control" href="#similar-product" data-slide="next">
 									<i class="fa fa-angle-right"></i>
-								  </a>
+								  </a> -->
 							</div>
 
 						</div>
@@ -45,7 +50,7 @@
 								<input type="hidden" name="product_id" value="{{$value->product_id}}">
 								<input type="hidden" name="product_name" value="{{$value->product_name}}">
 								<input type="hidden" name="price" value="{{$value->product_price}}">
-
+								<input type="hidden" name="image" value="{{$value->product_image}}">
 
 							<div class="product-information"><!--/product-information-->
 								<h2>{{$value->product_name}}</h2>
@@ -53,7 +58,7 @@
 								<span>
 									<span>{{number_format($value->product_price).'  VNĐ'}}</span>
 									<label>Số lượng:</label>
-									<input type="number" name="quality" placeholder="1" min="1"/>
+									<input type="number" name="quality" value="1" min="1"/>
 									<button type="submit" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Thêm giỏ hàng

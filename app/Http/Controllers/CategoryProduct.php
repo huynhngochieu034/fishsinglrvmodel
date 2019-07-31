@@ -52,21 +52,21 @@ class CategoryProduct extends Controller
         // }
 
     	$category->save();
-    	Session::put('message', 'Thêm danh mục sản phẩm thành công');
+    	Session::put('messagesuccess', 'Thêm danh mục sản phẩm thành công');
     	return Redirect::to('/add-category-product');  
     }
 
  	public function unactive($category_product_id){
         $this->AuthLogin();
     	DB::table('tbl_category_product')->where('category_id',$category_product_id)->update(['category_status'=>0]);
-    	Session::put('message', 'Kích hoạt danh mục sản phẩm thành công');
+    	Session::put('messagesuccess', 'Kích hoạt danh mục sản phẩm thành công');
     	return Redirect::to('/all-category-product');
     }
 
     public function active($category_product_id){
         $this->AuthLogin();
     	DB::table('tbl_category_product')->where('category_id',$category_product_id)->update(['category_status'=>1]);
-    	Session::put('message', 'Ẩn danh mục sản phẩm thành công');
+    	Session::put('messagesuccess', 'Ẩn danh mục sản phẩm thành công');
     	return Redirect::to('/all-category-product');
     }
 
@@ -89,14 +89,14 @@ $this->AuthLogin();
      //    $category->category_desc = $request->category_product_desc;
      //    $category->category_status = $request->category_product_status;
      //    $category->save();
-        Session::put('message', 'Cập nhật danh mục sản phẩm thành công');
+        Session::put('messagesuccess', 'Cập nhật danh mục sản phẩm thành công');
         return Redirect::to('/all-category-product');
     }
 
     public function delete($category_product_id){
         $this->AuthLogin();
         DB::table('tbl_category_product')->where('category_id',$category_product_id)->delete();
-        Session::put('message', 'Xóa danh mục sản phẩm thành công');
+        Session::put('messagesuccess', 'Xóa danh mục sản phẩm thành công');
         return Redirect::to('/all-category-product');
     }
 

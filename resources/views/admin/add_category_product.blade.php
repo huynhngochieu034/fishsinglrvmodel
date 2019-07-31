@@ -7,9 +7,9 @@
                             Thêm danh mục sản phẩm
                         </header>
                         <?php
-                        $message = Session::get('message');
+                        $message = Session::get('messagesuccess');
                         if($message){
-                        echo '<span class="text-alert">'.$message.'</span>';
+                        echo '<span class="text-success">'.$message.'</span>';
                         Session::put('message',null);
                          }
                          ?>

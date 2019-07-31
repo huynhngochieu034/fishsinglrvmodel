@@ -60,26 +60,26 @@ $this->AuthLogin();
     		$get_image->move('public/uploads/product',$new_image);
     		$data['product_image']= $new_image;
 			DB::table('tbl_product')->insert($data);
-    		Session::put('message', 'Thêm sản phẩm thành công');
+    		Session::put('messagesuccess', 'Thêm sản phẩm thành công');
     		return Redirect::to('/add-product');
     	}
     	$data['product_image']= '';
 	    DB::table('tbl_product')->insert($data);
-	    Session::put('message', 'Thêm sản phẩm thành công');
+	    Session::put('messagesuccess', 'Thêm sản phẩm thành công');
 	    return Redirect::to('/all-product');
     }
 
  	public function unactive($product_id){
  		$this->AuthLogin();
     	DB::table('tbl_product')->where('product_id',$product_id)->update(['product_status'=>1]);
-    	Session::put('message', 'Ẩn thương hiệu thành công');
+    	Session::put('messagesuccess', 'Ẩn thương hiệu thành công');
     	return Redirect::to('/all-product');
     }
 
     public function active($product_id){
     	$this->AuthLogin();
     	DB::table('tbl_product')->where('product_id',$product_id)->update(['product_status'=>0]);
-    	Session::put('message', 'Kích hoạt thương hiệu thành công');
+    	Session::put('messagesuccess', 'Kích hoạt thương hiệu thành công');
     	return Redirect::to('/all-product');	
     }
 
@@ -119,14 +119,14 @@ $this->AuthLogin();
     	}
     	$data['product_image']= '';
 	    DB::table('tbl_product')->where('product_id', $product_id)->update($data);
-	    Session::put('message', 'Cập nhật sản phẩm thành công');
+	    Session::put('messagesuccess', 'Cập nhật sản phẩm thành công');
 	    return Redirect::to('/all-product');
     }
 
     public function delete($product_id){
     	$this->AuthLogin();
         DB::table('tbl_product')->where('product_id',$product_id)->delete();
-        Session::put('message', 'Xóa sản phẩm thành công');
+        Session::put('messagesuccess', 'Xóa sản phẩm thành công');
         return Redirect::to('/all-product');
     }
 
@@ -156,11 +156,49 @@ $this->AuthLogin();
         $cart->product_name = $request->product_name;
         $cart->price = $request->price;
         $cart->quality = $request->quality;
+        $cart->image = $request->image;
+
+        $session_id = Session::get('session_id');
+         if(empty($session_id)){
+             $session_id = str_random(40);
+            Session::put('session_id',$session_id);
+
+        }
+        if(empty($cart->session_id)){
+            $cart->session_id = $session_id;
+        }
+
         if(empty($cart->user_email)){
             $cart->user_email = '';
         }
+
+        $countProducts = DB::table('cart')->where(['product_id'=>$request->product_id, 'session_id'=>$session_id])->count();
+        if($countProducts > 0){
+            return Redirect()->back()->with('flash_message_error','Sản phẩm đã có trong giỏ hàng!');     
+        }else{
+                $cart->save();
+        }
        
-        $cart->save();
        
+        return Redirect('cart')->with('flash_message_success','Sản phẩm đã được thêm vào giỏ hàng!');
+    }
+
+    public function cart(Request $request){
+        $session_id = Session::get('session_id');
+        $userCart= DB::table('cart')->where(['session_id'=>$session_id])->get();
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        return view('pages.cart.cart')->with('category',$cate_product)->with('brand',$brand_product)->with(compact('userCart'));
+       
+    }
+
+    public function deleteCartProduct($id = null){
+        DB::table('cart')->where('id',$id)->delete();
+        return Redirect('cart')->with('flash_message_success','Xóa sản phẩm thành công!');
+    }
+
+    public function updateCartQuality($id=null,$quality=null){
+        DB::table('cart')->where('id',$id)->increment('quality',$quality);
+         return Redirect('cart')->with('flash_message_success','Cập nhật số lượng thành công!');
     }
 }

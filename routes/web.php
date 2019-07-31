@@ -63,5 +63,14 @@ Route::post('/save-product', 'ProductController@save');
 Route::post('/update-product/{product_id}', 'ProductController@update');
 
 //add to cart
-//Route::match(['get','post'], '/add-cart','ProductController@addtocart');
-Route::post('/add-cart', 'ProductController@addtocart');
+Route::match(['get','post'], '/add-cart','ProductController@addtocart');
+//Route::post('/add-cart', 'ProductController@addtocart');
+
+//cart page
+Route::match(['get','post'], '/cart','ProductController@cart');
+
+//delete product from cart page
+Route::get('/cart/delete-product/{id}','ProductController@deleteCartProduct');
+
+//update product quality in cart
+Route::get('/cart/update-quality/{id}/{quality}','ProductController@updateCartQuality');

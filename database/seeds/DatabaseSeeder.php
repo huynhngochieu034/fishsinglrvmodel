@@ -30,7 +30,7 @@ class adminSeeder extends Seeder{
     public function run(){
         DB::table('tbl_admin')->insert([
           ['admin_name' => 'Hieu','admin_phone'=>'0223434234432','admin_email' => 'Hieu034@gmail.com','admin_password' => md5('123456')],
-          ['admin_name' => 'abc','admin_phone'=>'06576545466466','admin_email' => 'tui@gmail.com','admin_password' => md5('123456')]
+          ['admin_name' => 'Chau','admin_phone'=>'06576545466466','admin_email' => 'Chau@gmail.com','admin_password' => md5('123456')]
         ]);
 
           DB::table('tbl_category_product')->insert([

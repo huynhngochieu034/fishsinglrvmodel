@@ -7,9 +7,9 @@
                             Thêm sản phẩm
                         </header>
                         <?php
-                        $message = Session::get('message');
+                        $message = Session::get('messagesuccess');
                         if($message){
-                        echo '<span class="text-alert">'.$message.'</span>';
+                        echo '<span class="text-success">'.$message.'</span>';
                         Session::put('message',null);
                          }
                          ?>
@@ -25,7 +25,7 @@
 
                                  <div class="form-group">
                                     <label for="exampleInputEmail1">Giá sản phẩm</label>
-                                    <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá sản phẩm" required>
+                                    <input type="number" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá sản phẩm" required>
                                 </div>
 
                                      <div class="form-group">
