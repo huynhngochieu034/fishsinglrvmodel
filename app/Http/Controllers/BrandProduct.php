@@ -11,13 +11,21 @@ use App\Models\Brand;
 session_start();
 class BrandProduct extends Controller
 {
-    public function AuthLogin(){
+   public function AuthLogin(){
         $admin_id = Session::get('admin_id');
+        
         if($admin_id){
+            $users = DB::table('users')->where('id',$admin_id)->first();
+            if($users->admin == 0){
+
+            }else{
+                //Session::put('message','Bạn không có quyền truy cập.');
+            return Redirect::to('/trang-chu')->send();
+            }
             ///return Redirect::to('dashboard');
         }else{
-            Session::put('message','Bạn không có quyền truy cập.');
-            return Redirect::to('admin')->send();
+            //Session::put('message','Bạn không có quyền truy cập.');
+            return Redirect::to('/trang-chu')->send();
         }
     }
 

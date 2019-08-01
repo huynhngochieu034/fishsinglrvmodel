@@ -82,6 +82,11 @@ Route::post('/user-register','UserController@register');
 
 Route::get('/user-logout','UserController@logout');
 
+Route::post('/user-login','UserController@login');
+
+//check out
+Route::get('/all-cart', 'ProductController@allCart');
+
 //Route::match(['get','post'], '/login-register','UsersController@register');
 
 

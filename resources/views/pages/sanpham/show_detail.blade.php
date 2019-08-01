@@ -7,6 +7,7 @@
 					<button type="button" class="close" data-dismiss="alert">x</button>
 						<strong>{!! session('flash_message_error') !!}</strong>
 				</div>
+				Session::put('flash_message_error',null);
 				@endif
 <div class="product-details"><!--product-details-->
 	<h2 class="title text-center">Chi tiết sản phẩm</h2>
@@ -63,7 +64,7 @@
 									<input type="number" name="quality" max="{{$value->product_stock}}" value="1" min="1"/>
 									<button type="submit" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
-										Thêm giỏ hàng
+										Đặt hàng
 									</button>
 									@endif
 
@@ -118,7 +119,7 @@
                                             <img src="{{URL::to('public/uploads/product/'.$lienquan->product_image)}}" height="150" width="100" alt="" />
                                             <h2>{{number_format($lienquan->product_price).'  VNĐ'}}</h2>
                                             <p>{{$lienquan->product_name}}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Đặt hàng</a>
                                         </div>
                                        
                                 </div>

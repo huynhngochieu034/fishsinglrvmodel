@@ -13,13 +13,22 @@ class ProductController extends Controller
 {
 	 public function AuthLogin(){
         $admin_id = Session::get('admin_id');
+        
         if($admin_id){
+            $users = DB::table('users')->where('id',$admin_id)->first();
+            if($users->admin == 0){
+
+            }else{
+                //Session::put('message','Bạn không có quyền truy cập.');
+            return Redirect::to('/trang-chu')->send();
+            }
             ///return Redirect::to('dashboard');
         }else{
-            Session::put('message','Bạn không có quyền truy cập.');
-            return Redirect::to('admin')->send();
+            //Session::put('message','Bạn không có quyền truy cập.');
+            return Redirect::to('/trang-chu')->send();
         }
     }
+    
    public function add(){
    	$this->AuthLogin();
    		$cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
@@ -29,7 +38,7 @@ class ProductController extends Controller
     }
 
     public function all(){
-$this->AuthLogin();
+        $this->AuthLogin();
     	$all_product = DB::table('tbl_product')
     	->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
     	->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')->orderby('tbl_product.product_id','desc')->get();
@@ -154,7 +163,18 @@ $this->AuthLogin();
     }
 
     public function addtocart(Request $request){
+
+
         $cart = new Cart();
+        $userid = Session::get('admin_id');
+
+        if($userid){
+            $cart->user_id = $userid;
+        }else{
+
+            return Redirect::to('/login-register')->with('flash_message_error','Vui lòng đăng nhập(nếu chưa có tài khoản hãy đăng kí)!');
+        }
+        
         $cart->product_id = $request->product_id;
         $cart->product_name = $request->product_name;
         $cart->price = $request->price;
@@ -170,21 +190,19 @@ $this->AuthLogin();
         if(empty($cart->session_id)){
             $cart->session_id = $session_id;
         }
-
-        if(empty($cart->user_email)){
-            $cart->user_email = '';
-        }
+        
 
         $countProducts = DB::table('cart')->where(['product_id'=>$request->product_id, 'session_id'=>$session_id])->count();
+
         if($countProducts > 0){
             return Redirect()->back()->with('flash_message_error','Sản phẩm đã có trong giỏ hàng!');     
         }else{
 
-                $cart->save();
+            $cart->save();
         }
        
        
-        return Redirect('cart')->with('flash_message_success','Sản phẩm đã được thêm vào giỏ hàng!');
+        return Redirect('cart')->with('flash_message_success','Đặt hàng thành công!');
     }
 
     public function cart(Request $request){
@@ -216,4 +234,15 @@ $this->AuthLogin();
         }
        
     }
+
+    public function allCart(){
+         $this->AuthLogin();
+        $all_cart = DB::table('cart')
+        ->join('users','users.id','=','cart.user_id')->orderby('cart.user_id','desc')->get();
+
+        $manager_cart = view('admin.all_cart')->with('all_cart',$all_cart);
+        return view('admin_layout')->with('admin.all_cart', $manager_cart);
+    }
+
+
 }

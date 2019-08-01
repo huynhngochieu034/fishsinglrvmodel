@@ -10,7 +10,7 @@
 				  <li class="active">Shopping Cart</li>
 				</ol>
 			</div> -->
-			<h2 class="title text-center">Giỏ hàng</h2>
+			<h2 class="title text-center">Hàng đã đặt</h2>
 			<div class="table-responsive cart_info">
 
 				@if(Session::has('flash_message_success'))
@@ -142,6 +142,7 @@
 						<ul>
 							<li class="p-3 mb-2 bg-light text-dark">Tổng Cộng: <span><?php echo number_format($total_amount).'  VNĐ'; ?></span></li>
 						</ul>
+						<!-- <a class="btn btn-default check_out" href="{{URL::to('/')}}">Đặt hàng</a> -->
 							
 					</div>
 				</div>

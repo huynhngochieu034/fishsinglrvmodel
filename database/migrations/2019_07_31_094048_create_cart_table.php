@@ -19,7 +19,7 @@ class CreateCartTable extends Migration
             $table->string('product_name');
             $table->integer('quality');
             $table->string('price');
-            $table->string('user_email');
+            $table->integer('user_id');
             $table->string('session_id');
             $table->string('image');
             $table->timestamps();

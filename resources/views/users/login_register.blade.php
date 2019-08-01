@@ -42,7 +42,7 @@
             </div>
         </div><!--/header_top-->
         
-        <div class="header-middle"><!--header-middle-->
+           <div class="header-middle"><!--header-middle-->
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
@@ -58,7 +58,12 @@
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
-                                <li><a href="{{URL::to('/login-register')}}"><i class="fa fa-lock"></i>Đăng nhập admin</a></li>
+                                @if(Session::has('admin_id'))
+                                <!-- <li><a href="#"><i class="fa fa-user"></i> Tài khoản</a></li> -->
+                                <li><a href="{{URL::to('/user-logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                                @else
+                                 <li><a href="{{URL::to('/login-register')}}"><i class="fa fa-lock"></i>Đăng nhập</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -129,13 +134,14 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Đăng nhập tài khoản</h2>
-						<form action="#">
-							<input type="text" placeholder="Tên tài khoản" required/>
-							<input type="email" placeholder="Email Address" required/>
-							<span>
+						<form id="loginForm" name="loginForm" action="{{URL::to('/user-login')}}" method="post">
+                            {{ csrf_field() }}
+							<input name="email" type="email" placeholder="Email" required/>
+                            <input name="password" type="password" placeholder="Mật khẩu" required/>
+							<!-- <span>
 								<input type="checkbox" class="checkbox"> 
 								Ghi nhớ
-							</span>
+							</span> -->
 							<button type="submit" class="btn btn-default">Đăng nhập</button>
 						</form>
 					</div><!--/login form-->
@@ -150,6 +156,8 @@
 						<form id="registerForm"  name="registerForm" action="{{URL::to('/user-register')}}" method="post">
 							{{ csrf_field() }}
 							<input id="name" name="name" type="text" placeholder="Tên" required />
+                            <input id="phone" name="phone" type="text" placeholder="Số điện thoại" required />
+                            <input id="address" name="address" type="text" placeholder="Địa chỉ" required />
 							<input id="email" name="email" type="email" placeholder="Email" required/>
 							<input id="password" name="password" type="password" placeholder="Mật khẩu" onKeyUp="checkPasswordStrength();" required/>
 							<div id="password-strength-status"></div>

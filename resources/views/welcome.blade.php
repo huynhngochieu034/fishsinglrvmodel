@@ -68,11 +68,11 @@
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
-                                @if(empty(Auth::check()))
-                                <li><a href="{{URL::to('/login-register')}}"><i class="fa fa-lock"></i>Đăng nhập</a></li>
-                                @else
-                                 <li><a href="#"><i class="fa fa-user"></i> Tài khoản</a></li>
+                                @if(Session::has('admin_id'))
+                                <!-- <li><a href="#"><i class="fa fa-user"></i> Tài khoản</a></li> -->
                                 <li><a href="{{URL::to('/user-logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                                @else
+                                 <li><a href="{{URL::to('/login-register')}}"><i class="fa fa-lock"></i>Đăng nhập</a></li>
                                 @endif
                             </ul>
                         </div>
@@ -81,6 +81,7 @@
             </div>
         </div><!--/header-middle-->
     
+               
         <div class="header-bottom"><!--header-bottom-->
             <div class="container">
                 <div class="row">
@@ -208,7 +209,7 @@
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
                                 @foreach($brand as $key => $brand)
-                                <li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand->brand_id)}}"><span class="pull-right">(50)</span>{{$brand->brand_name}}</span></a></li>
+                                <li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand->brand_id)}}"><span class="pull-right"></span>{{$brand->brand_name}}</span></a></li>
                                  @endforeach
                             </ul>
                         </div>
