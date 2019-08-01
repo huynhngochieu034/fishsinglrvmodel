@@ -74,3 +74,8 @@ Route::get('/cart/delete-product/{id}','ProductController@deleteCartProduct');
 
 //update product quality in cart
 Route::get('/cart/update-quality/{id}/{quality}','ProductController@updateCartQuality');
+
+//Register/Login
+
+
+

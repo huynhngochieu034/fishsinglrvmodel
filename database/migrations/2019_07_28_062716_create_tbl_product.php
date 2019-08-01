@@ -15,13 +15,14 @@ class CreateTblProduct extends Migration
     {
         Schema::create('tbl_product', function (Blueprint $table) {
             $table->increments('product_id');
-            $table->string('product_name')->unique();;
+            $table->string('product_name');
             $table->integer('category_id');
             $table->integer('brand_id');
             $table->text('product_desc');
             $table->text('product_content');
             $table->string('product_price');
             $table->string('product_image');
+            $table->integer('product_stock');
             $table->integer('product_status');
             $table->timestamps();
         });

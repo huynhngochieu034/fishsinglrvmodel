@@ -28,9 +28,15 @@
                                     <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" value="{{$pro->product_price}}" required>
                                 </div>
 
+                                 <div class="form-group">
+                                    <label for="exampleInputEmail1">Số lượng sản phẩm</label>
+                                    <input type="number" name="product_stock" class="form-control" id="exampleInputEmail1" value="{{$pro->product_stock}}" placeholder="Số lượng sản phẩm" required>
+                                </div>
+
                                      <div class="form-group">
                                     <label for="exampleInputPassword1">Hình ảnh sản phẩm</label>
                                     <input type="file" name="product_image" class="form-control" value="{{$pro->product_image}}" id="exampleInputEmail1">
+                                    <input type="hidden" name="product_imagee" class="form-control" value="{{$pro->product_image}}" id="exampleInputEmail1">
                                     <img src="{{URL::to('public/uploads/product/'.$pro->product_image)}}" height="100" width="100">
                                 </div>
 

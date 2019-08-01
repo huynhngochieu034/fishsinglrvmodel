@@ -28,9 +28,14 @@
                                     <input type="number" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá sản phẩm" required>
                                 </div>
 
+                                 <div class="form-group">
+                                    <label for="exampleInputEmail1">Số lượng sản phẩm</label>
+                                    <input type="number" name="product_stock" class="form-control" id="exampleInputEmail1" placeholder="Số lượng sản phẩm" required>
+                                </div>
+
                                      <div class="form-group">
                                     <label for="exampleInputPassword1">Hình ảnh sản phẩm</label>
-                                    <input type="file" name="product_image" class="form-control" id="exampleInputEmail1">
+                                    <input type="file" name="product_image" class="form-control" id="exampleInputEmail1" required>
                                 </div>
 
                                 <div class="form-group">

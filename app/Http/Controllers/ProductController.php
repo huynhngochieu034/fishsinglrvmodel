@@ -45,6 +45,7 @@ $this->AuthLogin();
     	$data = array();
     	$data['product_name'] = $request->product_name;
 		$data['product_price'] = $request->product_price;
+        $data['product_stock'] = $request->product_stock;
 		$data['product_desc'] = $request->product_desc;
 		$data['product_content'] = $request->product_content;
 		$data['category_id'] = $request->product_cate;
@@ -98,6 +99,7 @@ $this->AuthLogin();
        $data = array();
     	$data['product_name'] = $request->product_name;
 		$data['product_price'] = $request->product_price;
+        $data['product_stock'] = $request->product_stock;
 		$data['product_desc'] = $request->product_desc;
 		$data['product_content'] = $request->product_content;
 		$data['category_id'] = $request->product_cate;
@@ -117,7 +119,8 @@ $this->AuthLogin();
     		Session::put('message', 'Cập nhật sản phẩm thành công');
     		return Redirect::to('/all-product');
     	}
-    	$data['product_image']= '';
+
+    	$data['product_image']= $request->product_imagee;
 	    DB::table('tbl_product')->where('product_id', $product_id)->update($data);
 	    Session::put('messagesuccess', 'Cập nhật sản phẩm thành công');
 	    return Redirect::to('/all-product');
@@ -176,6 +179,7 @@ $this->AuthLogin();
         if($countProducts > 0){
             return Redirect()->back()->with('flash_message_error','Sản phẩm đã có trong giỏ hàng!');     
         }else{
+
                 $cart->save();
         }
        
@@ -198,7 +202,18 @@ $this->AuthLogin();
     }
 
     public function updateCartQuality($id=null,$quality=null){
-        DB::table('cart')->where('id',$id)->increment('quality',$quality);
-         return Redirect('cart')->with('flash_message_success','Cập nhật số lượng thành công!');
+        $getCartDetails = DB::table('cart')->where('id',$id)->first();
+        $getStock = DB::table('tbl_product')->where('product_id',$getCartDetails->product_id)->first();
+        $updateQuality = $getCartDetails->quality + $quality;
+
+        if($getStock->product_stock >= $updateQuality){
+           //$total = $getStock->product_stock - $updateQuality;
+            //DB::table('tbl_product')->where('product_id', $getCartDetails->product_id)->update(['product_stock'=>$total]);
+            DB::table('cart')->where('id',$id)->increment('quality',$quality);
+             return Redirect('cart')->with('flash_message_success','Cập nhật số lượng thành công!');
+        }else{
+            return Redirect('cart')->with('flash_message_error','Số lượng sản phẩm đã đạt tối đa!');
+        }
+       
     }
 }

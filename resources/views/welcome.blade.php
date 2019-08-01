@@ -32,8 +32,8 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i> +84 35 74 79 762</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i> Huynhngochieu034@gmail.com</a></li>
                             </ul>
                         </div>
                     </div>
@@ -57,18 +57,18 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="#"><img src="#" alt="" /></a>
+                            <a href="{{URL::to('/trang-chu')}}"><img src="{{('public/frontend/images/logo.jpg')}}" width="80" height="80" alt="" />PRO FISHSING</a>
                         </div>
                         
                     </div>
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+                                <!-- <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="#"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
+                                <li><a href="{{URL::to('/admin')}}"><i class="fa fa-lock"></i>Đăng nhập admin</a></li>
                             </ul>
                         </div>
                     </div>
@@ -91,27 +91,29 @@
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
                                 <li><a href="{{URL::to('/trang-chu')}}" class="active">Trang chủ</a></li>
-                                <li class="dropdown"><a href="#">Sản phẩm<i class="fa fa-angle-down"></i></a>
+                               <!--  <li class="dropdown"><a href="#">Sản phẩm<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">Products</a></li>
-                                        <!-- <li><a href="product-details.html">Product Details</a></li> 
+                                        <li><a href="product-details.html">Product Details</a></li> 
                                         <li><a href="checkout.html">Checkout</a></li> 
                                         <li><a href="cart.html">Cart</a></li> 
-                                        <li><a href="login.html">Login</a></li>  -->
+                                        <li><a href="login.html">Login</a></li> 
                                     </ul>
-                                </li> 
+                                </li>  -->
                                 <!-- <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                     
                                 </li>  -->
-                                <li><a href="#">Giỏ hàng</a></li>
+                                <li><a href="{{URL::to('/cart')}}">Giỏ hàng</a></li>
+                                <li><a href="#">Giới thiệu</a></li>
+                                <li><a href="#">Chăm sóc</a></li>
                                 <li><a href="#">Liên hệ</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="search_box pull-right">
+                       <!--  <div class="search_box pull-right">
                             <input type="text" placeholder="Search"/>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -119,6 +121,7 @@
     </header><!--/header-->
     
     <section id="slider"><!--slider-->
+
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -176,6 +179,7 @@
             </div>
         </div>
     </section><!--/slider-->
+
     
     <section>
         <div class="container">
@@ -206,20 +210,7 @@
 
                         </div>
 
-                        <!--price-range-->
-                       <!--  <div class="price-range">
-                            <h2>Giá</h2>
-                            <div class="well text-center">
-                                 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                                 <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-                            </div>
-                        </div> -->
-                        <!--/price-range-->
                         
-                        <!--shipping-->
-                        <!-- <div class="shipping text-center">
-                            <img src="#" alt="" />
-                        </div> --><!--/shipping-->
                     
                     </div>
                 </div>
@@ -236,8 +227,8 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left">Copyright © 2019 E-FISHSING Inc. All rights reserved.</p>
-                    <p class="pull-right">Designed by <span><a target="_blank" href="#">Themeum</a></span></p>
+                    <p class="pull-left">Copyright © 2019 FISHSING Inc. All rights reserved.</p>
+                    <p class="pull-right">Designed by <span><a target="_blank" href="#">PRO</a></span></p>
                 </div>
             </div>
         </div>
