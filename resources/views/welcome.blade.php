@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="{{URL::to('/trang-chu')}}"><img src="{{('public/frontend/images/logo.jpg')}}" width="80" height="80" alt="" />PRO FISHSING</a>
+                            <a href="{{URL::to('/trang-chu')}}"><img src="{{asset('public/frontend/images/logo.jpg')}}" width="80" height="80" alt="" />PRO FISHSING</a>
                         </div>
                         
                     </div>
@@ -68,7 +68,12 @@
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
-                                <li><a href="{{URL::to('/admin')}}"><i class="fa fa-lock"></i>Đăng nhập admin</a></li>
+                                @if(empty(Auth::check()))
+                                <li><a href="{{URL::to('/login-register')}}"><i class="fa fa-lock"></i>Đăng nhập</a></li>
+                                @else
+                                 <li><a href="#"><i class="fa fa-user"></i> Tài khoản</a></li>
+                                <li><a href="{{URL::to('/user-logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -139,8 +144,8 @@
                                     <h2>Laravel</h2>
                                 </div>
                                 <div class="col-sm-9">
-                                    <img  src="{{('public/frontend/images/111.jpg')}}" class="girl img-responsive" alt="" />
-                                     <img src="{{('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
+                                    <img  src="{{asset('public/frontend/images/111.jpg')}}" class="girl img-responsive" alt="" />
+                                     <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
                                 </div>
                             </div>
                             <div class="item">
@@ -149,8 +154,8 @@
                                     <h2>Laravel</h2>
                                 </div>
                                 <div class="col-sm-9">
-                                    <img  src="{{('public/frontend/images/333.jpg')}}" class="girl img-responsive" alt="" />
-                                     <img src="{{('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
+                                    <img  src="{{asset('public/frontend/images/333.jpg')}}" class="girl img-responsive" alt="" />
+                                     <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
                                 </div>
                             </div>
                             
@@ -160,8 +165,8 @@
                                    <h2>Laravel</h2>
                                 </div>
                                 <div class="col-sm-9">
-                                    <img  src="{{('public/frontend/images/2222.jpg')}}" class="girl img-responsive" alt="" />
-                                      <img src="{{('public/frontend/images/2.jfif')}}" class="pricing" alt="" />
+                                    <img  src="{{asset('public/frontend/images/2222.jpg')}}" class="girl img-responsive" alt="" />
+                                      <img src="{{asset('public/frontend/images/2.jfif')}}" class="pricing" alt="" />
                                 </div>
                             </div>
                             

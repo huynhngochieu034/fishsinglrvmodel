@@ -76,6 +76,12 @@ Route::get('/cart/delete-product/{id}','ProductController@deleteCartProduct');
 Route::get('/cart/update-quality/{id}/{quality}','ProductController@updateCartQuality');
 
 //Register/Login
+Route::get('/login-register','UserController@userLoginRegister');
 
+Route::post('/user-register','UserController@register');
+
+Route::get('/user-logout','UserController@logout');
+
+//Route::match(['get','post'], '/login-register','UsersController@register');
 
 
