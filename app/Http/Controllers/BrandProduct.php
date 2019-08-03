@@ -43,6 +43,12 @@ $this->AuthLogin();
 
     public function save(Request $request){
         $this->AuthLogin();
+        $Counter = DB::table('tbl_brand')->where('brand_name',$request->brand_product_name)->count();
+        if($Counter > 0){
+                 Session::put('messageerror', 'Tên thương hiệu đã tồn tại!');
+                return Redirect::to('/add-brand-product');
+        }
+        else{
 
         $brand = new Brand();
         $brand->brand_name = $request->brand_product_name;
@@ -50,8 +56,9 @@ $this->AuthLogin();
         $brand->brand_status = $request->brand_product_status;
         $brand->save();
         
-    	Session::put('messagesuccess', 'Thêm thương hiệu sản phẩm thành công');
-    	return Redirect::to('/add-brand-product');
+        Session::put('messagesuccess', 'Thêm thương hiệu sản phẩm thành công');
+        return Redirect::to('/add-brand-product');
+        }
     }
 
  	public function unactive($brand_product_id){
@@ -78,6 +85,12 @@ $this->AuthLogin();
 
  public function update($brand_product_id,Request $request){
     $this->AuthLogin();
+         $Counter = DB::table('tbl_brand')->where('brand_name',$request->brand_product_name)->count();
+        if($Counter > 0){
+                 Session::put('messageerror', 'Tên thương hiệu đã tồn tại!');
+                return Redirect::to('/all-brand-product');
+            }
+        else{
         $data = array();
         $data['brand_name'] = $request->brand_product_name;
         $data['brand_desc'] = $request->brand_product_desc;
@@ -86,12 +99,21 @@ $this->AuthLogin();
         Session::put('messagesuccess', 'Cập nhật thương hiệu thành công');
         return Redirect::to('/all-brand-product');
     }
+    }
 
     public function delete($brand_product_id){
         $this->AuthLogin();
+         $Counter = DB::table('tbl_product')->where('brand_id',$brand_product_id)->count();
+            if($Counter > 0){
+                 Session::put('messageerror', 'Thương hiệu đã có sản phẩm không thể xóa!');
+                return Redirect::to('/all-brand-product');
+            }
+        else{
+
         DB::table('tbl_brand')->where('brand_id',$brand_product_id)->delete();
         Session::put('messagesuccess', 'Xóa thương hiệu thành công');
         return Redirect::to('/all-brand-product');
+    }
     }
 
     ///eND page admin

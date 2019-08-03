@@ -70,7 +70,7 @@
                                 <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
                                 @if(Session::has('admin_id'))
-                                <li><a href="{{URL::to('/history')}}"><i class="fa fa-history"></i>Lịch sử giao dịch</a></li>
+                                 <li><a href="{{URL::to('/history')}}"><i class="fa fa-history"></i>Lịch sử giao dịch</a></li>
                                  <li><a href="{{URL::to('/account')}}"><i class="fa fa-user"></i> Tài khoản</a></li>
                                 <li><a href="{{URL::to('/user-logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
                                 @else
@@ -127,111 +127,64 @@
             </div>
         </div><!--/header-bottom-->
     </header><!--/header-->
-    
-    <section id="slider"><!--slider-->
+	<section id="form" style="margin-top: 20px"><!--form-->
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#slider-carousel" data-slide-to="1"></li>
-                            <li data-target="#slider-carousel" data-slide-to="2"></li>
-                        </ol>
-                        
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="col-sm-3">
-                                    <h1><span>Cá Kiểng</span></h1>
-                                    <h2>Laravel</h2>
-                                </div>
-                                <div class="col-sm-9">
-                                    <img  src="{{asset('public/frontend/images/111.jpg')}}" class="girl img-responsive" alt="" />
-                                     <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-3">
-                                    <h1><span>Cá Kiểng</span></h1>
-                                    <h2>Laravel</h2>
-                                </div>
-                                <div class="col-sm-9">
-                                    <img  src="{{asset('public/frontend/images/333.jpg')}}" class="girl img-responsive" alt="" />
-                                     <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
-                                </div>
-                            </div>
-                            
-                            <div class="item">
-                                <div class="col-sm-3">
-                                   <h1><span>Cá Kiểng</span></h1>
-                                   <h2>Laravel</h2>
-                                </div>
-                                <div class="col-sm-9">
-                                    <img  src="{{asset('public/frontend/images/2222.jpg')}}" class="girl img-responsive" alt="" />
-                                      <img src="{{asset('public/frontend/images/2.jfif')}}" class="pricing" alt="" />
-                                </div>
-                            </div>
-                            
-                        </div>
-                        
-                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section><!--/slider-->
+		<div class="container">
+			<div class="row">
+				@if(Session::has('flash_message_success'))
+				<div class="alert alert-success alert-block">
+					<button type="button" class="close" data-dismiss="alert">x</button>
+						<strong>{!! session('flash_message_success') !!}</strong>
+				</div>
+				@endif
+				@if(Session::has('flash_message_error'))
+				<div class="alert alert-danger alert-block">
+					<button type="button" class="close" data-dismiss="alert">x</button>
+						<strong>{!! session('flash_message_error') !!}</strong>
+				</div>
+				@endif
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form">
+						<h2>Cập nhật tài khoản</h2>
+						<form id="accountForm" name="accountForm" action="{{URL::to('/account')}}" method="post">
+                            {{ csrf_field() }}
+							<input value="{{ $userDetails->name }}" id="name" name="name" type="text" placeholder="Tên" required />
+                            <input value="{{ $userDetails->phone }}" id="phone" name="phone" type="text" placeholder="Số điện thoại" required />
+                            <input value="{{ $userDetails->address }}" id="address" name="address" type="text" placeholder="Địa chỉ" required />
+							<!-- <span>
+								<input type="checkbox" class="checkbox"> 
+								Ghi nhớ
+							</span> -->
+							<button type="submit" class="btn btn-default">Cập nhật</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-sm-1">
+					<h2 class="or">Hoặc</h2>
+				</div>
+				<div class="col-sm-4">
 
-    
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="left-sidebar">
-                        <h2>Danh mục sản phẩm</h2>
-                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                            @foreach($category as $key => $cate)
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="{{URL::to('/danh-muc-san-pham/'.$cate->category_id)}}">{{$cate->category_name}}</a></h4>
-                                </div>
-                            </div>
-                             @endforeach
-                        </div><!--/category-products-->
-                       
+					<div class="signup-form">
+						<h2>Thay đổi mật khẩu!</h2>
+						<form id="passwordForm"  name="passwordForm" action="{{URL::to('/update-user-pwd')}}" method="post">
+							{{ csrf_field() }}
+                            <input id="current_pwd" name="current_pwd" type="password" placeholder="Mật khẩu cũ" required/>
+                            <span id="chkPwd" ></span>
+                            <input id="new_pwd" name="new_pwd" type="password" placeholder="Mật khẩu mới" onKeyUp="checkPasswordStrength();" required/>
+                            <div id="password-strength-status"></div>
 
-                        <div class="brands_products">
-                        <h2>Thương hiệu sản phẩm</h2>
-                        <div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                @foreach($brand as $key => $brand)
-                                <li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand->brand_id)}}"><span class="pull-right"></span>{{$brand->brand_name}}</span></a></li>
-                                 @endforeach
-                            </ul>
-                        </div>
-
-                        </div>
-
-                        
-                    
-                    </div>
-                </div>
-                
-                <div class="col-sm-9 padding-right">
-                  @yield('content')
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer id="footer"><!--Footer-->
+							<input id="confirm_pwd" name="confirm_pwd" type="password" placeholder="Nhập lại mật khẩu mới" required/>
+                            <span id='message'></span>
+							<button id="myBtn" type="submit" class="btn btn-default">Thay đổi mật khẩu</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+	
+	
+	 <footer id="footer"><!--Footer-->
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
@@ -242,7 +195,7 @@
         </div>
         
     </footer><!--/Footer-->
-    
+	
 
   
     <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
@@ -251,5 +204,77 @@
     <script src="{{asset('public/frontend/js/price-range.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+    	$(document).ready(function(){
+    	
+
+  
+
+    $("#current_pwd").keyup(function(){
+        var current_pwd = $(this).val();
+        $.ajax({
+            headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             },
+            type:'post',
+            url:'/fishsinglrvmodel/check-user-pwd',
+            data:{current_pwd:current_pwd},
+            success:function(resp){
+                if(resp=="false"){
+                    $("#chkPwd").html("<font color='red'>Mật khẩu hiện tại không đúng</font>");
+                    document.getElementById("myBtn").disabled = true;
+                }else if(resp == "true"){
+                    $("#chkPwd").html("<font color='green'>Mật khẩu OKE!</font>");
+                    document.getElementById("myBtn").disabled = false;
+                }
+                //alert(resp);
+            },error:function(){
+               console.log('error');
+            }
+        });
+    });
+
+$('#new_pwd, #confirm_pwd').keyup(function(){
+    document.getElementById("myBtn").disabled = true;
+  if ($('#new_pwd').val() == $('#confirm_pwd').val()) {
+    $('#message').html('Mật khẩu khớp').css('color', 'green');
+    document.getElementById("myBtn").disabled = false;
+  } else 
+    $('#message').html('Mật khẩu không khớp').css('color', 'red');
+});
+    		
+   });
+function checkPasswordStrength() {
+	var number = /([0-9])/;
+	var alphabets = /([a-zA-Z])/;
+	var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+	
+	if($('#new_pwd').val().length<8) {
+		$('#password-strength-status').removeClass();
+		$('#password-strength-status').addClass('weak-password');
+		$('#password-strength-status').html("Yếu (Nhỏ hơn 8 kí tự.)");
+        
+	} else {  	
+	    if($('#new_pwd').val().match(number) && $('#new_pwd').val().match(alphabets) && $('#new_pwd').val().match(special_characters)) {            
+			$('#password-strength-status').removeClass();
+			$('#password-strength-status').addClass('strong-password');
+			$('#password-strength-status').html("Mạnh");
+            
+        } else {
+			$('#password-strength-status').removeClass();
+			$('#password-strength-status').addClass('medium-password');
+			$('#password-strength-status').html("Trung bình (bao gồm chữ, số và kí tự đặc biệt.)");
+             
+        } 
+	}
+}
+
+
+
+    </script>
+
 </body>
 </html>

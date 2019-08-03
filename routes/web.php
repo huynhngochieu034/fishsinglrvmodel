@@ -87,6 +87,27 @@ Route::post('/user-login','UserController@login');
 //check out
 Route::get('/all-cart', 'ProductController@allCart');
 
-//Route::match(['get','post'], '/login-register','UsersController@register');
+//update cart status
+Route::get('/update-cart-status','ProductController@updateCartStatus');
 
+//update account
+//Route::match(['get','post'], '/account','UserController@account');
 
+Route::group(['middleware'=>['frontlogin']],function(){
+	Route::match(['get','post'], '/account','UserController@account');
+	//Check current userpass
+	Route::post('/check-user-pwd','UserController@chkUserPassword');
+
+	Route::post('/update-user-pwd','UserController@updatePassword');
+
+	Route::get('/history','UserController@history');
+});
+
+Route::get('/all-cartv', 'CartController@allCart');
+
+Route::get('/unactive-cart/{id}', 'CartController@unactiveCart');
+Route::get('/active-cart/{id}', 'CartController@activeCart');
+
+Route::get('/delete-cart/{id}', 'CartController@deleteCart');
+
+Route::get('/cart/quality/{id}/{quality}','CartController@cartQuality');

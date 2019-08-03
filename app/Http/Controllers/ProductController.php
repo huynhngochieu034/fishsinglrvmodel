@@ -50,7 +50,12 @@ class ProductController extends Controller
     public function save(Request $request){
     	$this->AuthLogin();
 
-
+         $Counter = DB::table('tbl_product')->where('product_name',$request->product_name)->count();
+        if($Counter > 0){
+                 Session::put('messageerror', 'Tên sản phẩm đã tồn tại!');
+                return Redirect::to('/add-product');
+        }
+        else{
     	$data = array();
     	$data['product_name'] = $request->product_name;
 		$data['product_price'] = $request->product_price;
@@ -77,6 +82,7 @@ class ProductController extends Controller
 	    DB::table('tbl_product')->insert($data);
 	    Session::put('messagesuccess', 'Thêm sản phẩm thành công');
 	    return Redirect::to('/all-product');
+    }
     }
 
  	public function unactive($product_id){
@@ -105,6 +111,12 @@ class ProductController extends Controller
 
  public function update($product_id,Request $request){
  	$this->AuthLogin();
+    $Counter = DB::table('tbl_product')->where('product_name',$request->product_name)->count();
+        if($Counter > 0){
+                 Session::put('messageerror', 'Tên sản phẩm đã tồn tại!');
+                return Redirect::to('/all-product');
+            }
+        else{
        $data = array();
     	$data['product_name'] = $request->product_name;
 		$data['product_price'] = $request->product_price;
@@ -134,12 +146,21 @@ class ProductController extends Controller
 	    Session::put('messagesuccess', 'Cập nhật sản phẩm thành công');
 	    return Redirect::to('/all-product');
     }
+    }
 
     public function delete($product_id){
     	$this->AuthLogin();
+
+          $Counter = DB::table('cart')->where('product_id',$product_id)->count();
+            if($Counter > 0){
+                 Session::put('messageerror', 'Sản phẩm đã có người đặt không thể xóa!');
+                return Redirect::to('/all-product');
+            }
+        else{
         DB::table('tbl_product')->where('product_id',$product_id)->delete();
         Session::put('messagesuccess', 'Xóa sản phẩm thành công');
         return Redirect::to('/all-product');
+    }
     }
 
     //END ADMIN PAGE
@@ -180,6 +201,7 @@ class ProductController extends Controller
         $cart->price = $request->price;
         $cart->quality = $request->quality;
         $cart->image = $request->image;
+        $cart->status = 1;
 
         $session_id = Session::get('session_id');
          if(empty($session_id)){
@@ -202,7 +224,7 @@ class ProductController extends Controller
         }
        
        
-        return Redirect('cart')->with('flash_message_success','Đặt hàng thành công!');
+        return Redirect('cart')->with('flash_message_success','Thêm sản phẩm vào giỏ hàng thành công!');
     }
 
     public function cart(Request $request){
@@ -215,19 +237,32 @@ class ProductController extends Controller
     }
 
     public function deleteCartProduct($id = null){
-        DB::table('cart')->where('id',$id)->delete();
+        DB::table('cart')->where('cart_id',$id)->delete();
         return Redirect('cart')->with('flash_message_success','Xóa sản phẩm thành công!');
     }
 
+    public function updateCartStatus(){
+         $session_id = Session::get('session_id');
+         
+        if($session_id){
+            DB::table('cart')->where(['session_id'=>$session_id])->update(['status'=>0]);
+            Session::put('session_id',null);
+            return Redirect('cart')->with('flash_message_success','Đặt hàng thành công!');
+        }else{
+            return Redirect('cart')->with('flash_message_error','Chưa có sản phẩm nào!');
+        }
+       
+    }
+
     public function updateCartQuality($id=null,$quality=null){
-        $getCartDetails = DB::table('cart')->where('id',$id)->first();
+        $getCartDetails = DB::table('cart')->where('cart_id',$id)->first();
         $getStock = DB::table('tbl_product')->where('product_id',$getCartDetails->product_id)->first();
         $updateQuality = $getCartDetails->quality + $quality;
 
         if($getStock->product_stock >= $updateQuality){
            //$total = $getStock->product_stock - $updateQuality;
             //DB::table('tbl_product')->where('product_id', $getCartDetails->product_id)->update(['product_stock'=>$total]);
-            DB::table('cart')->where('id',$id)->increment('quality',$quality);
+            DB::table('cart')->where('cart_id',$id)->increment('quality',$quality);
              return Redirect('cart')->with('flash_message_success','Cập nhật số lượng thành công!');
         }else{
             return Redirect('cart')->with('flash_message_error','Số lượng sản phẩm đã đạt tối đa!');
@@ -236,13 +271,14 @@ class ProductController extends Controller
     }
 
     public function allCart(){
-         $this->AuthLogin();
+        $this->AuthLogin();
         $all_cart = DB::table('cart')
-        ->join('users','users.id','=','cart.user_id')->orderby('cart.user_id','desc')->get();
+        ->join('users','users.id','=','cart.user_id')->where('cart.status','0')->orderby('cart.user_id','desc')->get();
 
         $manager_cart = view('admin.all_cart')->with('all_cart',$all_cart);
         return view('admin_layout')->with('admin.all_cart', $manager_cart);
     }
 
+    
 
 }

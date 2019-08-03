@@ -44,25 +44,23 @@ class CategoryProduct extends Controller
 
     public function save(Request $request){
         $this->AuthLogin();
-        $category = new Category();
-    	
 
+        $Counter = DB::table('tbl_category_product')->where('category_name',$request->category_product_name)->count();
+        if($Counter > 0){
+                 Session::put('messageerror', 'Tên danh mục đã tồn tại!');
+                return Redirect::to('/add-category-product');
+        }
+        else{
+
+        $category = new Category();
         $category->category_name = $request->category_product_name;
         $category->category_desc = $request->category_product_desc;
         $category->category_status = $request->category_product_status;
 
-        // $validate = Category::get()->count()->where('category_name',$request->cate_product_name);
-        // //$validate = DB::table('tbl_category_product')->where('category_name',$request->cate_product_name)->count();
-        // if($validate == 0){
-          
-        // }else{
-        //     Session::put('message', 'Tên danh mục sản phẩm đã tồn tại.');
-        // return Redirect::to('/add-category-product');
-        // }
-
     	$category->save();
     	Session::put('messagesuccess', 'Thêm danh mục sản phẩm thành công');
     	return Redirect::to('/add-category-product');  
+    }
     }
 
  	public function unactive($category_product_id){
@@ -88,7 +86,12 @@ $this->AuthLogin();
 
  public function update($category_product_id,Request $request){
     $this->AuthLogin();
-    //$category = Category::find($category_product_id);
+     $Counter = DB::table('tbl_category_product')->where('category_name',$request->category_product_name)->count();
+        if($Counter > 0){
+                 Session::put('messageerror', 'Tên danh mục đã tồn tại!');
+                return Redirect::to('/all-category-product');
+            }
+        else{
         $data = array();
         $data['category_name'] = $request->category_product_name;
         $data['category_desc'] = $request->category_product_desc;
@@ -101,12 +104,20 @@ $this->AuthLogin();
         Session::put('messagesuccess', 'Cập nhật danh mục sản phẩm thành công');
         return Redirect::to('/all-category-product');
     }
+    }
 
     public function delete($category_product_id){
         $this->AuthLogin();
+         $Counter = DB::table('tbl_product')->where('category_id',$category_product_id)->count();
+            if($Counter > 0){
+                 Session::put('messageerror', 'Danh mục đã có sản phẩm không thể xóa!');
+                return Redirect::to('/all-category-product');
+            }
+        else{
         DB::table('tbl_category_product')->where('category_id',$category_product_id)->delete();
         Session::put('messagesuccess', 'Xóa danh mục sản phẩm thành công');
         return Redirect::to('/all-category-product');
+    }
     }
 
     //End Function Admin Page

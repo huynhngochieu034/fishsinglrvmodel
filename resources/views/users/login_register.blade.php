@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home | Fishsing</title>
     <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -13,9 +14,19 @@
     <link href="{{asset('public/frontend/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <!-- <link rel="shortcut icon" href="{{('public/frontend/images/logo.jfif')}}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png"> -->
+</head><!--/head-->
 
 <body>
-	<header id="header"><!--header-->
+    <header id="header"><!--header-->
         <div class="header_top"><!--header_top-->
             <div class="container">
                 <div class="row">
@@ -42,7 +53,7 @@
             </div>
         </div><!--/header_top-->
         
-           <div class="header-middle"><!--header-middle-->
+        <div class="header-middle"><!--header-middle-->
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
@@ -59,7 +70,8 @@
                                 <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
                                 @if(Session::has('admin_id'))
-                                <!-- <li><a href="#"><i class="fa fa-user"></i> Tài khoản</a></li> -->
+                                 <li><a href="{{URL::to('/history')}}"><i class="fa fa-history"></i>Lịch sử giao dịch</a></li>
+                                 <li><a href="{{URL::to('/account')}}"><i class="fa fa-user"></i> Tài khoản</a></li>
                                 <li><a href="{{URL::to('/user-logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
                                 @else
                                  <li><a href="{{URL::to('/login-register')}}"><i class="fa fa-lock"></i>Đăng nhập</a></li>
@@ -71,6 +83,7 @@
             </div>
         </div><!--/header-middle-->
     
+               
         <div class="header-bottom"><!--header-bottom-->
             <div class="container">
                 <div class="row">
@@ -161,7 +174,7 @@
 							<input id="email" name="email" type="email" placeholder="Email" required/>
 							<input id="password" name="password" type="password" placeholder="Mật khẩu" onKeyUp="checkPasswordStrength();" required/>
 							<div id="password-strength-status"></div>
-							<button type="submit" class="btn btn-default">Đăng kí</button>
+							<button id="myBtn" type="submit" class="btn btn-default">Đăng kí</button>
 						</form>
 					</div><!--/sign up form-->
 				</div>
@@ -194,20 +207,20 @@
 
     <script type="text/javascript">
 
-  //   	$(document).ready(function(){
-  //   	$('#registerForm').submit(function(e) {
-  //   e.preventDefault();
-  //   var password = $('#password').val();
-  //   $(".error").remove();
-  //   if (password.length < 6) {
-  //     $('#password').after('<span class="text-danger">Mật khẩu phải lớn hơn 6 kí tự</span>');
-  //   }
+     	$(document).ready(function(){
+   //   	$('#registerForm').submit(function(e) {
+   //  e.preventDefault();
+   //   var password = $('#password').val();
+   //   $(".error").remove();
+   //   if (password.length < 6) {
+   // $('#password').after('<span class="text-danger">Mật khẩu phải lớn hơn 6 kí tự</span>');
+   //   }else return;
     
-  // });
+   // });
 
 
     		
-  //  });
+    });
 function checkPasswordStrength() {
 	var number = /([0-9])/;
 	var alphabets = /([a-zA-Z])/;
@@ -217,15 +230,18 @@ function checkPasswordStrength() {
 		$('#password-strength-status').removeClass();
 		$('#password-strength-status').addClass('weak-password');
 		$('#password-strength-status').html("Yếu (Nhỏ hơn 8 kí tự.)");
+        
 	} else {  	
 	    if($('#password').val().match(number) && $('#password').val().match(alphabets) && $('#password').val().match(special_characters)) {            
 			$('#password-strength-status').removeClass();
 			$('#password-strength-status').addClass('strong-password');
 			$('#password-strength-status').html("Mạnh");
+             
         } else {
 			$('#password-strength-status').removeClass();
 			$('#password-strength-status').addClass('medium-password');
 			$('#password-strength-status').html("Trung bình (bao gồm chữ, số và kí tự đặc biệt.)");
+             
         } 
 	}
 }

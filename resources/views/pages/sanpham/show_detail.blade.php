@@ -64,7 +64,7 @@
 									<input type="number" name="quality" max="{{$value->product_stock}}" value="1" min="1"/>
 									<button type="submit" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
-										Đặt hàng
+										Thêm vào giỏ
 									</button>
 									@endif
 
@@ -77,7 +77,7 @@
 								<p><b>Tình trạng:</b> Hết hàng</p>
 								@endif
 
-								<p><b>Điều kiện:</b> Mới 100%</p>
+								<p><b>Ship toàn quốc free</b>( Chuyển khoản gửi xe hoặc hàng không, mọi rủi ro trong quá trình vận chuyển bên bán chịu)</p>
 								<p><b>Thương hiệu: </b>{{$value->brand_name}}</p>
 								<p><b>Danh mục: </b>{{$value->category_name}}</p>
 								
@@ -119,7 +119,7 @@
                                             <img src="{{URL::to('public/uploads/product/'.$lienquan->product_image)}}" height="150" width="100" alt="" />
                                             <h2>{{number_format($lienquan->product_price).'  VNĐ'}}</h2>
                                             <p>{{$lienquan->product_name}}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Đặt hàng</a>
+                                            <a href="{{URL::to('/chi-tiet-san-pham/'.$lienquan->product_id)}}" class="btn btn-success"><i class="fa fa-angle-double-right"></i>Xem chi tiết</a>
                                         </div>
                                        
                                 </div>

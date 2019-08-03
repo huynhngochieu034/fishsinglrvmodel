@@ -31,7 +31,14 @@
                         $message = Session::get('messagesuccess');
                         if($message){
                         echo '<span class="text-success">'.$message.'</span>';
-                        Session::put('message',null);
+                        Session::put('messagesuccess',null);
+                         }
+                         ?>
+                          <?php
+                        $message = Session::get('messageerror');
+                        if($message){
+                        echo '<span class="text-danger">'.$message.'</span>';
+                        Session::put('messageerror',null);
                          }
                          ?>
       <table class="table table-striped b-t b-light">

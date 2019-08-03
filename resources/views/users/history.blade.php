@@ -70,7 +70,7 @@
                                 <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
                                 @if(Session::has('admin_id'))
-                                <li><a href="{{URL::to('/history')}}"><i class="fa fa-history"></i>Lịch sử giao dịch</a></li>
+                                 <li><a href="{{URL::to('/history')}}"><i class="fa fa-history"></i>Lịch sử giao dịch</a></li>
                                  <li><a href="{{URL::to('/account')}}"><i class="fa fa-user"></i> Tài khoản</a></li>
                                 <li><a href="{{URL::to('/user-logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
                                 @else
@@ -127,111 +127,62 @@
             </div>
         </div><!--/header-bottom-->
     </header><!--/header-->
-    
-    <section id="slider"><!--slider-->
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#slider-carousel" data-slide-to="1"></li>
-                            <li data-target="#slider-carousel" data-slide-to="2"></li>
-                        </ol>
-                        
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="col-sm-3">
-                                    <h1><span>Cá Kiểng</span></h1>
-                                    <h2>Laravel</h2>
-                                </div>
-                                <div class="col-sm-9">
-                                    <img  src="{{asset('public/frontend/images/111.jpg')}}" class="girl img-responsive" alt="" />
-                                     <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-3">
-                                    <h1><span>Cá Kiểng</span></h1>
-                                    <h2>Laravel</h2>
-                                </div>
-                                <div class="col-sm-9">
-                                    <img  src="{{asset('public/frontend/images/333.jpg')}}" class="girl img-responsive" alt="" />
-                                     <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
-                                </div>
-                            </div>
-                            
-                            <div class="item">
-                                <div class="col-sm-3">
-                                   <h1><span>Cá Kiểng</span></h1>
-                                   <h2>Laravel</h2>
-                                </div>
-                                <div class="col-sm-9">
-                                    <img  src="{{asset('public/frontend/images/2222.jpg')}}" class="girl img-responsive" alt="" />
-                                      <img src="{{asset('public/frontend/images/2.jfif')}}" class="pricing" alt="" />
-                                </div>
-                            </div>
-                            
-                        </div>
-                        
-                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section><!--/slider-->
 
-    
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="left-sidebar">
-                        <h2>Danh mục sản phẩm</h2>
-                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                            @foreach($category as $key => $cate)
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="{{URL::to('/danh-muc-san-pham/'.$cate->category_id)}}">{{$cate->category_name}}</a></h4>
-                                </div>
-                            </div>
-                             @endforeach
-                        </div><!--/category-products-->
-                       
+    <section id="cart_items">
+		<div class="container container-responsive">
 
-                        <div class="brands_products">
-                        <h2>Thương hiệu sản phẩm</h2>
-                        <div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                @foreach($brand as $key => $brand)
-                                <li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand->brand_id)}}"><span class="pull-right"></span>{{$brand->brand_name}}</span></a></li>
-                                 @endforeach
-                            </ul>
-                        </div>
+			<!-- <div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div> -->
+			<h2 class="text-center">Lịch sử giao dịch</h2>
+			<div class="table-responsive">
 
-                        </div>
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Sản phẩm</td>
+							<td class="description"></td>
+							<td class="price">Giá</td>
+							<td class="quantity">Số lượng</td>
+							<td class="total">Tổng</td>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($userCart as $cart)
+						<tr>
+							<td>
+								<img height="50" width="50" src="{{URL::to('/public/uploads/product/'.$cart->image)}}" alt="">
+							</td>
+							<td>
+								<h4><a href="">{{ $cart->product_name }}</a></h4>
+								<p>Mã ID:{{ $cart->product_id }} </p>
+							</td>
+							<td>
+								<p>{{number_format($cart->price).'  VNĐ'}}</p>
+							</td>
+							<td>
+                 				<p>{{$cart->quality}}</p>
+            				</td>
+							<td>
+								<p>{{number_format($cart->price * $cart->quality).'  VNĐ'}}</p>
+							</td>
+						</tr>
+						@endforeach
+						
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+	
 
-                        
-                    
-                    </div>
-                </div>
-                
-                <div class="col-sm-9 padding-right">
-                  @yield('content')
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer id="footer"><!--Footer-->
+	
+	 <footer id="footer"><!--Footer-->
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
@@ -242,7 +193,7 @@
         </div>
         
     </footer><!--/Footer-->
-    
+	
 
   
     <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
@@ -251,5 +202,8 @@
     <script src="{{asset('public/frontend/js/price-range.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+   
 </body>
 </html>
