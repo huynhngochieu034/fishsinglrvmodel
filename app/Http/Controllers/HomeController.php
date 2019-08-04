@@ -21,4 +21,30 @@ class HomeController extends Controller
 
     	return view('pages.home')->with('category',$cate_product)->with('brand',$brand_product)->with('all_product',$all_product);
     }
+
+    public function introduce(){
+      $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+      $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+      return view('introduce')->with('category',$cate_product)->with('brand',$brand_product);
+    }
+
+    public function guide(){
+      $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+      $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+      return view('guide')->with('category',$cate_product)->with('brand',$brand_product);
+    }
+
+    public function phongbenh(){
+      $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+      $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+      return view('phongbenh')->with('category',$cate_product)->with('brand',$brand_product);
+    }
+
+    public function phongbenhnam(){
+      $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+      $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+      return view('phongbenhnam')->with('category',$cate_product)->with('brand',$brand_product);
+    }
+
+
 }

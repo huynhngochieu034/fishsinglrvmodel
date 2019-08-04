@@ -33,8 +33,8 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="#"><i class="fa fa-phone"></i> +84 35 74 79 762</a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i> Huynhngochieu034@gmail.com</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i> 035.74.79.762</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i> Cacanhpro@gmail.com</a></li>
                             </ul>
                         </div>
                     </div>
@@ -112,9 +112,8 @@
                                     
                                 </li>  -->
                                 <li><a href="{{URL::to('/cart')}}">Giỏ hàng</a></li>
-                                <li><a href="#">Giới thiệu</a></li>
-                                <li><a href="#">Chăm sóc</a></li>
-                                <li><a href="#">Liên hệ</a></li>
+                                <li><a href="{{URL::to('/guide')}}">Chăm sóc</a></li>
+                                <li><a href="{{URL::to('/introduce')}}">Giới thiệu</a></li>
                             </ul>
                         </div>
                     </div>
@@ -147,7 +146,7 @@
                                     <h2>Laravel</h2>
                                 </div>
                                 <div class="col-sm-9">
-                                    <img  src="{{asset('public/frontend/images/111.jpg')}}" class="girl img-responsive" alt="" />
+                                    <img height="100" src="{{asset('public/frontend/images/111.jpg')}}" class="girl img-responsive" alt="" />
                                      <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
                                 </div>
                             </div>
@@ -157,7 +156,7 @@
                                     <h2>Laravel</h2>
                                 </div>
                                 <div class="col-sm-9">
-                                    <img  src="{{asset('public/frontend/images/333.jpg')}}" class="girl img-responsive" alt="" />
+                                    <img height="100" src="{{asset('public/frontend/images/333.jpg')}}" class="girl img-responsive" alt="" />
                                      <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
                                 </div>
                             </div>
@@ -168,7 +167,7 @@
                                    <h2>Laravel</h2>
                                 </div>
                                 <div class="col-sm-9">
-                                    <img  src="{{asset('public/frontend/images/2222.jpg')}}" class="girl img-responsive" alt="" />
+                                    <img height="100" src="{{asset('public/frontend/images/2222.jpg')}}" class="girl img-responsive" alt="" />
                                       <img src="{{asset('public/frontend/images/2.jfif')}}" class="pricing" alt="" />
                                 </div>
                             </div>

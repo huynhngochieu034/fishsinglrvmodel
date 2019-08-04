@@ -33,8 +33,8 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="#"><i class="fa fa-phone"></i> +84 35 74 79 762</a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i> Huynhngochieu034@gmail.com</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i> 035.74.79.762</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i> Cacanhpro@gmail.com</a></li>
                             </ul>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                 <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
                                 @if(Session::has('admin_id'))
-                                 <li><a href="{{URL::to('/history')}}"><i class="fa fa-history"></i>Lịch sử giao dịch</a></li>
+                                <li><a href="{{URL::to('/history')}}"><i class="fa fa-history"></i>Lịch sử giao dịch</a></li>
                                  <li><a href="{{URL::to('/account')}}"><i class="fa fa-user"></i> Tài khoản</a></li>
                                 <li><a href="{{URL::to('/user-logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
                                 @else
@@ -110,11 +110,10 @@
                                 </li>  -->
                                 <!-- <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                     
-                                </li>  -->
+                                </li>  -->VBV 
                                 <li><a href="{{URL::to('/cart')}}">Giỏ hàng</a></li>
-                                <li><a href="#">Giới thiệu</a></li>
-                                <li><a href="#">Chăm sóc</a></li>
-                                <li><a href="#">Liên hệ</a></li>
+                                <li><a href="{{URL::to('/guide')}}">Chăm sóc</a></li>
+                                <li><a href="{{URL::to('/introduce')}}">Giới thiệu</a></li>
                             </ul>
                         </div>
                     </div>
@@ -127,6 +126,7 @@
             </div>
         </div><!--/header-bottom-->
     </header><!--/header-->
+
 	<section id="form" style="margin-top: 20px"><!--form-->
 
 		<div class="container">

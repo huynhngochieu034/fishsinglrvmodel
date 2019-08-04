@@ -57,7 +57,7 @@
             <th>Số điện thoại</th>
             <th>Địa chỉ</th>
             <th>Giao hàng</th>
-            <!-- <th style="width:30px;">Thao tác</th> -->
+            <th style="width:30px;">Thao tác</th>
           </tr>
         </thead>
         <tbody>
@@ -109,11 +109,11 @@
           </span></td>
            
            
-           <!--  <td>
+            <td>
               
                 <a onclick="return confirm('Bạn muốn xóa đơn hàng này?')" href="{{URL::to('/delete-cart/'.$cartdata->cart_id)}}" class="active styling-edit" ui-toggle-class="">
                  <i class="fa fa-times text-danger text"></i></a> 
-            </td> -->
+            </td>
           </tr>
          
          @endforeach
