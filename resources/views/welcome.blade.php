@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <img height="100" src="{{asset('public/frontend/images/111.jpg')}}" class="girl img-responsive" alt="" />
-                                     <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
+                                     <!-- <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" /> -->
                                 </div>
                             </div>
                             <div class="item">
@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <img height="100" src="{{asset('public/frontend/images/333.jpg')}}" class="girl img-responsive" alt="" />
-                                     <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" />
+                                     <!-- <img src="{{asset('public/frontend/images/2.jfif')}}"  class="pricing" alt="" /> -->
                                 </div>
                             </div>
                             
@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <img height="100" src="{{asset('public/frontend/images/2222.jpg')}}" class="girl img-responsive" alt="" />
-                                      <img src="{{asset('public/frontend/images/2.jfif')}}" class="pricing" alt="" />
+                                      <!-- <img src="{{asset('public/frontend/images/2.jfif')}}" class="pricing" alt="" /> -->
                                 </div>
                             </div>
                             
